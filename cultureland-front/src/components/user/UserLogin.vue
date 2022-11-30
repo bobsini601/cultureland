@@ -32,6 +32,10 @@
             </b-form-group>
             <p><button type="button" id="user_button" @click="confirm">로그인</button></p>
             <p><button type="button" id="user_button" @click="movePage">회원가입</button></p>
+            <div id="find_anchor">
+              <span><router-link :to="{ name: 'findId' }">아이디 찾기</router-link></span>
+              <span><router-link :to="{ name: 'findPw' }">비밀번호 찾기</router-link></span>
+            </div>
           </b-form>
         </b-card>
       </b-col>

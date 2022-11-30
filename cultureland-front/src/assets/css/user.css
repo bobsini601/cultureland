@@ -14,3 +14,14 @@
     background-color: #398a46;
     color: white;
 }
+
+#find_anchor{
+    /* 양쪽으로 배치 */
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 40px;
+}
+
+#find_anchor > span > a{
+    color:gray;
+}

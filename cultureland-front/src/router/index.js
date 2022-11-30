@@ -47,6 +47,16 @@ const routes = [
         name: "update",
         component: () => import("@/components/user/UserUpdate"),
       },
+      {
+        path: "findId",
+        name: "findId",
+        component: ()=>import("@/components/user/UserFindId"),
+      },
+      {
+        path: "findPw",
+        name: "findPw",
+        component: ()=>import("@/components/user/UserFindPw"),
+      },
     ],
   },
 ];
