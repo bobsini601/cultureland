@@ -11,25 +11,25 @@
         <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
           <b-form class="text-left">
             <b-alert show variant="danger" > 아이디를 찾을 수 없습니다. </b-alert>
-            <!-- <b-form-group label-for="username">
+            <b-form-group label-for="name">
               <b-form-input
-                id="username"
-                v-model="user.username"
+                id="name"
+                v-model="user.name"
                 required
-                placeholder="ID"
+                placeholder="본명"
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
-            <b-form-group label-for="password">
+            <b-form-group label-for="email">
               <b-form-input
-                type="password"
-                id="password"
-                v-model="user.password"
+                type="email"
+                id="email"
+                v-model="user.email"
                 required
-                placeholder="PW"
+                placeholder="이메일"
                 @keyup.enter="confirm"
               ></b-form-input> 
-            </b-form-group>-->
+            </b-form-group>
             <p><button type="button" id="user_button" @click="confirm">아이디 찾기</button></p>
           </b-form>
         </b-card>
@@ -41,6 +41,22 @@
 <script>
 export default {
   name: "UserFindId",
+  data(){
+    return {
+      user :{
+        name : null,
+        email : null
+      }
+    }
+  },
+  computed:{
+
+  },
+  methods:{
+    confirm(){
+      console.log(this.user);
+    }
+  },
 }
 </script>
 <style scoped>

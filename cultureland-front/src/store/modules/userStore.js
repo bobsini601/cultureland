@@ -156,6 +156,7 @@ const userStore = {
 
     async userRegist({ commit }, user) {
       console.log("action, user >>" + user.username);
+      console.log("action, name >>" + user.name);
       console.log("action, password >>" + user.password);
       console.log("action, nickname >>" + user.nickname);
       console.log("action, email >>" + user.email);

@@ -21,6 +21,15 @@
                   @blur="idCheck"
                 ></b-form-input>
               </b-form-group>
+              <b-form-group label-for="name">
+                <b-form-input
+                  id="name"
+                  v-model="user.name"
+                  required
+                  placeholder="본명"
+                  @keyup.enter="confirm"
+                ></b-form-input>
+              </b-form-group>
               <b-form-group label-for="userpwd">
                 <b-form-input
                   type="password"
@@ -83,6 +92,7 @@ export default {
       // isLoginError: false,
       user: {
         username: null,
+        name : null,
         password: "",
         passwordCheck: "",
         nickname: null,
