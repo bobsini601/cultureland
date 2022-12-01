@@ -5,8 +5,8 @@ node_modules
 
 # 최종에는 풀어야 함!!
 # local env files
-#.env.local
-#.env.*.local
+# .env.local
+# .env.*.local
 
 # Log files
 npm-debug.log*
@@ -68,3 +68,6 @@ target
 secrets.yml
 .gradletasknamecache
 .sts4-cache
+
+# SpringBoot 추가
+.properties

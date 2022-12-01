@@ -15,9 +15,10 @@ public interface UserService {
 
 	public int removeUser(long userId) throws SQLException;
 
-	public String findPassword(Map<String, String> username) throws SQLException;
+	public User findPassword(Map<String, String> request) throws SQLException;
 
 	public User login(User user) throws SQLException;
+	
 
 	public void saveRefreshToken(long userId, String refreshToken) throws SQLException;
 
@@ -26,4 +27,6 @@ public interface UserService {
 	public void deleRefreshToken(String userId) throws SQLException;
 
 	public User getByUserName(String username) throws SQLException;
+	
+	public void sendEmail(User user) throws SQLException;
 }

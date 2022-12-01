@@ -48,11 +48,10 @@
 		where user_id=#{userId}
 	</delete>
 	
-	
-	<select id="selectPassword" parameterType="String" resultType="String">
-		select pwd
+	<select id="selectPassword" parameterType="Map" resultType="User">
+		select user_id, username, nickname, email, token
 		from user
-		where username=#{username}
+		where username=#{username} and email=#{email}
 	</select>
 	
 	<select id="getRefreshToken" parameterType="string" resultType="string">

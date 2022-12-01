@@ -115,23 +115,34 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 
-	// 비밀번호 찾기(시간 관계상 화면 구현까지는 가지 못했습니다.)
+	// 비밀번호 찾기 ( 임시 비밀번호 메일로 전송 ! )
 	@PostMapping("/findpwd")
-	public ResponseEntity<String> getPassword(@RequestBody Map<String, String> username) {
-		String userPassword = null;
+	public ResponseEntity<Map<String, Object>> getPassword(@RequestBody Map<String, String> request) {
+		User getUser = null;
 		HttpStatus status = null;
-
+		System.out.println("input 값 확인 >> " + request.toString());
+		Map<String, Object> resultMap = new HashMap<>();
+		
 		try {
-			userPassword = userService.findPassword(username);
-			System.out.println(username);
-			System.out.println(userPassword);
-			status = HttpStatus.ACCEPTED;
+			getUser = userService.findPassword(request);
+			if(getUser != null) {
+				status = HttpStatus.ACCEPTED;
+				resultMap.put("message", SUCCESS); // 사용할 수 있는 아이디 입니다.
+				
+				//아이디와 이메일, 확인 완료 해당 이메일로 임시비밀번호 보내기!!
+				userService.sendEmail(getUser);
+				System.out.println("test!!");
+				
+			} else {
+				status = HttpStatus.ACCEPTED;
+				resultMap.put("message", FAIL); // 존재잘못된 이메일 또는 아이디 입니다.
+			}
 		} catch (SQLException e) {
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 			e.printStackTrace();
 		}
 
-		return new ResponseEntity<String>(userPassword, status);
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 
 	// 아이디 중복체크 기능(시간 관계상 화면 구현까지는 가지 못했습니다.)
