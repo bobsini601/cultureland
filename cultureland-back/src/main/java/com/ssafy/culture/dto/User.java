@@ -2,33 +2,35 @@ package com.ssafy.culture.dto;
 
 //사용자의 정보입니다.
 public class User {
-	private long user_id;
+	private long userid;
 	private String username;
 	private String password;
 	private String nickname;
 	private String email;
 	private String token;
+	private String name;
 
 	public User() {
 		super();
 	}
 
-	public User(long user_id, String username, String password, String nickname, String email, String token) {
+	public User(long userid, String username, String password, String nickname, String email, String token,String name) {
 		super();
-		this.user_id = user_id;
+		this.userid = userid;
 		this.username = username;
 		this.password = password;
 		this.nickname = nickname;
 		this.email = email;
 		this.token = token;
+		this.name = name;
 	}
 
-	public long getUser_id() {
-		return user_id;
+	public long getuserid() {
+		return userid;
 	}
 
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
+	public void setuserid(long userid) {
+		this.userid = userid;
 	}
 
 	public String getUsername() {
@@ -70,11 +72,22 @@ public class User {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", username=" + username + ", password=" + password + ", nickname="
-				+ nickname + ", email=" + email + ", token=" + token + "]";
+		return "User [userid=" + userid + ", username=" + username + ", password=" + password + ", nickname="
+				+ nickname + ", email=" + email + ", token=" + token + ", name=" + name + "]";
 	}
+
+
 
 }

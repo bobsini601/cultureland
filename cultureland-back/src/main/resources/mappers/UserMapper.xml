@@ -6,32 +6,33 @@
 	
 	<insert id="insertUser" parameterType="User">
 		insert into user 
-		(username, nickname, pwd, email, token)
+		(username, nickname, pwd, email, token, name)
 		values
 			(
 			#{username}, 
 			#{nickname}, 
 			#{password}, 
 			#{email},
-			#{token})
+			#{token},
+			#{name})
 	</insert>
 	
 	<select id="selectUser" parameterType="User" resultType="User">
-		select user_id, username, nickname, email, token
+		select userid, username, nickname, email, token
 		from user
 		where  username=#{username} and pwd = #{password}
 	</select>
 	
 	<select id="selectUserName" parameterType="String" resultType="User">
-		select user_id, username, nickname, email, token
+		select userid, username, nickname, email, token
 		from user
 		where username=#{username}
 	</select>
 	
 	<select id="userInfo" parameterType="long" resultType="User">
-		select user_id, username, nickname, email
+		select userid, username, nickname, email
 		from user
-		where user_id=#{userId}
+		where userid=#{userId}
 	</select>
 	
 	<update id="updateUser" parameterType="User">
@@ -39,17 +40,17 @@
 		set username=#{username}, 
 			nickname=#{nickname},
 			email=#{email}
-		where user_id=#{user_id}
+		where userid=#{userid}
 	</update>
 	
 	<delete id="deleteUser">
 		delete
 		from user
-		where user_id=#{userId}
+		where userid=#{userId}
 	</delete>
 	
 	<select id="selectPassword" parameterType="Map" resultType="User">
-		select user_id, username, nickname, email, token
+		select userid, username, nickname, email, token
 		from user
 		where username=#{username} and email=#{email}
 	</select>
@@ -57,19 +58,19 @@
 	<select id="getRefreshToken" parameterType="string" resultType="string">
 		select token
 		from user
-		where user_id = #{userId}
+		where userid = #{userId}
 	</select>
 	
 	<update id="saveRefreshToken" parameterType="map">
 		update user
 		set token = #{token}
-		where user_id = #{userId}
+		where userid = #{userId}
 	</update>
 	
 	<update id="deleteRefreshToken" parameterType="map">
 		update user
 		set token = #{token, jdbcType=VARCHAR}
-		where user_id = #{userid}
+		where userid = #{userid}
 	</update>
 	
 </mapper>
