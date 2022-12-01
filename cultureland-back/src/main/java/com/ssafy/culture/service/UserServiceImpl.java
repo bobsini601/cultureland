@@ -99,7 +99,9 @@ public class UserServiceImpl implements UserService{
 		String hostSMTP = "smtp.gmail.com"; //네이버 이용시 smtp.naver.com
 		String hostSMTPid = serverEmail;
 		String hostSMTPpwd = serverPassword ;
-
+		
+		System.out.println(hostSMTPid);
+		System.out.println(hostSMTPpwd);
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = serverEmail;
 		String fromName = "culture land";
@@ -112,7 +114,7 @@ public class UserServiceImpl implements UserService{
 		msg += user.getNickname() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
 		msg += "<p>임시 비밀번호 : ";
 		msg += testPw + "</p></div>";
-
+		
 		// 받는 사람 E-Mail 주소
 		String mail = user.getEmail();
 		try {
@@ -121,7 +123,7 @@ public class UserServiceImpl implements UserService{
 			email.setCharset(charSet);
 			email.setSSL(true);
 			email.setHostName(hostSMTP);
-			email.setSmtpPort(587);
+			email.setSmtpPort(465);
 
 			email.setAuthentication(hostSMTPid, hostSMTPpwd);
 			email.setTLS(true);
