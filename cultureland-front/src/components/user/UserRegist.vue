@@ -41,7 +41,6 @@
                   @blur="pwCheck"
                 ></b-form-input>
               </b-form-group>
-
               <b-form-group label-for="userpwd">
                 <b-form-input
                   type="password"
@@ -50,9 +49,10 @@
                   required
                   placeholder="비밀번호 확인"
                   @keyup.enter="confirm"
-                  @blur="pwCheck"
+                  @keyup="pwCheck"
                 ></b-form-input>
               </b-form-group>
+              <b-alert show variant="danger"  v-if="!pwCheckOk"> 비밀번호가 같지 않습니다. </b-alert> 
               <b-form-group label-for="nickname">
                 <b-form-input
                   id="nickname"
@@ -83,7 +83,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapMutations, mapActions, mapState } from 'vuex';
 const userStore = "userStore";
 export default {
   name: "UserRegist",
@@ -98,10 +98,17 @@ export default {
         nickname: null,
         email: null
       }
+      ,pwIsEqual : true,
     };
+  },
+  created(){
+    // b-alert 뜨지않게 초기화
+    this.SET_PWCHECK(true);
   },
   methods:{
     ...mapActions(userStore, ["userRegist", "idcheck"]),
+    ...mapMutations(userStore,["SET_PWCHECK"]),
+
     confirm(){
         console.log(this.user);
         this.userRegist(this.user);
@@ -111,15 +118,14 @@ export default {
       console.log(this.idcheck(this.user))
     },
     pwCheck(){
-      console.log(this.pwCheckOK);
-      if(this.password != null && this.passwordCheck != null){
-        if(this.password === this.passwordCheck){
-          this.pwCheckOK = true;
+      if(this.user.password && this.user.passwordCheck){
+        if(this.user.password === this.user.passwordCheck){
+          this.SET_PWCHECK(true);
         } else {
-          this.pwCheckOK = false;
+          this.SET_PWCHECK(false);
         }
       } else {
-        this.pwCheckOK = false;
+        this.SET_PWCHECK(false);
       }
     }
   },
