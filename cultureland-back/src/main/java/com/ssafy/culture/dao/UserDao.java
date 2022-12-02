@@ -17,6 +17,8 @@ public interface UserDao {
 	User userInfo(long userid) throws SQLException;
 
 	int updateUser(User user) throws SQLException;
+	
+	int updateUserPassword(User user) throws SQLException; 
 
 	int deleteUser(long userid) throws SQLException;
 

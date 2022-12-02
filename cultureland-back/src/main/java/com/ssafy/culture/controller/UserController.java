@@ -131,7 +131,8 @@ public class UserController {
 				
 				//아이디와 이메일, 확인 완료 해당 이메일로 임시비밀번호 보내기!!
 				userService.sendEmail(getUser);
-				System.out.println("test!!");
+				//이메일을 성공적으로 보냇다면!!
+				System.out.println("잘보냈습니다!");
 				
 			} else {
 				status = HttpStatus.ACCEPTED;

@@ -12,6 +12,8 @@ public interface UserService {
 	public User getUser(long userId) throws SQLException;
 
 	public int modifyUser(User user) throws SQLException;
+	
+	public int modifyUserPassword(User user) throws SQLException;
 
 	public int removeUser(long userId) throws SQLException;
 

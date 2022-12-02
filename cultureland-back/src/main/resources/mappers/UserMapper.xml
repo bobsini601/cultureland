@@ -43,6 +43,12 @@
 		where userid=#{userid}
 	</update>
 	
+	<update id="updateUserPassword" parameterType="User">
+		update user
+		set pwd=#{password}
+		where user_id=#{user_id}
+	</update>
+	
 	<delete id="deleteUser">
 		delete
 		from user

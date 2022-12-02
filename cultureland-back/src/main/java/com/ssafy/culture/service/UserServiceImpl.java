@@ -59,6 +59,11 @@ public class UserServiceImpl implements UserService{
 	public int modifyUser(User user) throws SQLException {
 		return userDao.updateUser(user);
 	}
+	
+	@Override
+	public int modifyUserPassword(User user) throws SQLException {
+		return userDao.updateUserPassword(user);
+	}
 
 	@Override
 	public void saveRefreshToken(long userId, String refreshToken) throws SQLException {
@@ -88,12 +93,12 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void sendEmail(User user) throws SQLException {
+		Random random = new Random();
 		String testPw = "";
 		for (int i = 0; i < 6; i++) {
-			testPw += Math.random()*9+1;
+			testPw += random.nextInt(9)+1;
 		}
-		System.out.println(testPw);
-		
+		System.out.println("임시비밀번호? >> " + testPw);
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com"; //네이버 이용시 smtp.naver.com
@@ -135,6 +140,9 @@ public class UserServiceImpl implements UserService{
 		} catch (Exception e) {
 			System.out.println("메일발송 실패 : " + e);
 		}
+		
+		user.setPassword(testPw);
+		modifyUserPassword(user);
 	}
 	
 	
