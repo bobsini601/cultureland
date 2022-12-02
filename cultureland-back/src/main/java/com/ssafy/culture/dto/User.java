@@ -25,11 +25,11 @@ public class User {
 		this.name = name;
 	}
 
-	public long getuserid() {
+	public long getUserid() {
 		return userid;
 	}
 
-	public void setuserid(long userid) {
+	public void setUserid(long userid) {
 		this.userid = userid;
 	}
 

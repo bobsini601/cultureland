@@ -40,7 +40,7 @@ public class UserController {
 		this.jwtService = jwtService;
 	}
 
-	//회원가입
+	// 회원가입
 	@PostMapping
 	public ResponseEntity<Map<String, Object>> addUser(@RequestBody User user) {
 		Map<String, Object> resultMap = new HashMap<>();
@@ -72,9 +72,9 @@ public class UserController {
 			System.out.println(loginUser.toString());
 			// 로그인이 성공했다면!!
 			if (loginUser != null) {
-				String accessToken = jwtService.createAccessToken("userId", loginUser.getUser_id());// key, data
-				String refreshToken = jwtService.createRefreshToken("userId", loginUser.getUser_id());// key, data
-				userService.saveRefreshToken(loginUser.getUser_id(), refreshToken);
+				String accessToken = jwtService.createAccessToken("userId", loginUser.getUserid());// key, data
+				String refreshToken = jwtService.createRefreshToken("userId", loginUser.getUserid());// key, data
+				userService.saveRefreshToken(loginUser.getUserid(), refreshToken);
 				resultMap.put("access-token", accessToken);
 				resultMap.put("refresh-token", accessToken);
 				resultMap.put("message", SUCCESS);
@@ -122,18 +122,18 @@ public class UserController {
 		HttpStatus status = null;
 		System.out.println("input 값 확인 >> " + request.toString());
 		Map<String, Object> resultMap = new HashMap<>();
-		
+
 		try {
 			getUser = userService.findPassword(request);
-			if(getUser != null) {
+			if (getUser != null) {
 				status = HttpStatus.ACCEPTED;
 				resultMap.put("message", SUCCESS); // 사용할 수 있는 아이디 입니다.
-				
-				//아이디와 이메일, 확인 완료 해당 이메일로 임시비밀번호 보내기!!
+
+				// 아이디와 이메일, 확인 완료 해당 이메일로 임시비밀번호 보내기!!
 				userService.sendEmail(getUser);
-				//이메일을 성공적으로 보냇다면!!
+				// 이메일을 성공적으로 보냇다면!!
 				System.out.println("잘보냈습니다!");
-				
+
 			} else {
 				status = HttpStatus.ACCEPTED;
 				resultMap.put("message", FAIL); // 존재잘못된 이메일 또는 아이디 입니다.
@@ -221,15 +221,15 @@ public class UserController {
 		return new ResponseEntity<Integer>(result, status);
 	}
 
-	//refresh토큰 초기화!
+	// refresh토큰 초기화!
 	@PostMapping("/refresh")
 	public ResponseEntity<?> refreshToken(@RequestBody User getUser, HttpServletRequest request) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		String token = request.getHeader("refresh-token");
 		if (jwtService.checkToken(token)) {
-			if (token.equals(userService.getRefreshToken(getUser.getUser_id()))) {
-				String accessToken = jwtService.createAccessToken("userId", getUser.getUser_id());
+			if (token.equals(userService.getRefreshToken(getUser.getUserid()))) {
+				String accessToken = jwtService.createAccessToken("userId", getUser.getUserid());
 				resultMap.put("access-token", accessToken);
 				resultMap.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
