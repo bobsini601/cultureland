@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
-import { login, findById, findPassword, logout, tokenRegeneration, regist, withdraw, update, idcheck } from "@/api/user";
+import { login, findById, findId, findPassword, logout, tokenRegeneration, regist, withdraw, update, idcheck } from "@/api/user";
 
 const userStore = {
   namespaced: true,
@@ -8,6 +8,7 @@ const userStore = {
     isLogin: false,
     isLoginError: false,
     userInfo: null,
+    isFindId:false,
   },
   getters: {
   },
@@ -28,6 +29,9 @@ const userStore = {
     CLEAR_USER_INFO: (state) => {
       state.userInfo = null;
     },
+    SET_IS_FINDID:(state, isFindId)=>{
+      state.isFindId= isFindId;
+    }
   },
   actions: {
     async userConfirm({ commit }, user) {
@@ -182,6 +186,20 @@ const userStore = {
       );
     },
 
+    async findId({commit},user){
+      await findId(
+        user,
+        ({data})=>{
+          if(data.message=="success"){
+            commit("SET_IS_FINDID",true);
+          }
+          else{
+            commit("SET_IS_FINDID",false);
+          }
+        }
+      )
+    },
+    
     async findPassword({commit} , user){
       var res = false;
       await findPassword(

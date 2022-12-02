@@ -31,6 +31,10 @@ async function findPassword(user, success, fail){
 	await api.post('/user/findpwd', JSON.stringify(user)).then(success).catch(fail);
 }
 
+async function findId(user,success,fail){
+  await api.post('/user/findid', JSON.stringify(user)).then(success).catch(fail);
+}
+
 async function idcheck(user, success, fail) {
   await api.post("/user/idcheck", JSON.stringify(user)).then(success).catch(fail);
 }
@@ -41,4 +45,4 @@ async function tokenRegeneration(user, success, fail) {
   await api.post(`/user/refresh`, user).then(success).catch(fail);
 }
 
-export { login, findById, findPassword, logout, tokenRegeneration, regist, withdraw, update, idcheck};
+export { login, findById, findPassword, findId, logout, tokenRegeneration, regist, withdraw, update, idcheck};

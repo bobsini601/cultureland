@@ -37,7 +37,7 @@
                 placeholder="EMAIL"
               ></b-form-input> 
             </b-form-group>
-            <p><button type="button" id="find_button" @click="findPw">비밀번호 찾기</button></p>
+            <p><button type="button" id="user_button" @click="findPw">비밀번호 찾기</button></p>
           </b-form>
         </b-card>
       </b-col>
@@ -75,5 +75,5 @@ export default {
 }
 </script>
 <style scoped>
-
+@import "@/assets/css/user.css";
 </style>
