@@ -52,7 +52,7 @@
                   @keyup="pwCheck"
                 ></b-form-input>
               </b-form-group>
-              <b-alert show variant="danger"  v-if="!pwCheckOk"> 비밀번호가 같지 않습니다. </b-alert> 
+              <b-alert show variant="danger"  v-if="!pwIsEqual"> 비밀번호가 같지 않습니다. </b-alert> 
               <b-form-group label-for="nickname">
                 <b-form-input
                   id="nickname"
@@ -83,7 +83,7 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapActions, mapState } from 'vuex';
+import {mapActions} from 'vuex';
 const userStore = "userStore";
 export default {
   name: "UserRegist",
@@ -101,18 +101,22 @@ export default {
       ,pwIsEqual : true,
     };
   },
-  created(){
-    // b-alert 뜨지않게 초기화
-    this.SET_PWCHECK(true);
-  },
   methods:{
     ...mapActions(userStore, ["userRegist", "idcheck"]),
-    ...mapMutations(userStore,["SET_PWCHECK"]),
 
     confirm(){
-        console.log(this.user);
-        this.userRegist(this.user);
-        this.$router.push({ name: "home" });
+
+        if(!this.user.email || !this.user.name || !this.user.nickname || !this.user.username)
+        {
+          alert("양식을 다 채워주세요");
+        }
+        else if(!this.pwIsEqual){
+          alert("비밀번호를 확인해주세요");
+        }
+        else{
+          this.userRegist(this.user);
+          this.$router.push({ name: "home" });
+        }
     },
     idCheck(){
       console.log(this.idcheck(this.user))
@@ -120,18 +124,15 @@ export default {
     pwCheck(){
       if(this.user.password && this.user.passwordCheck){
         if(this.user.password === this.user.passwordCheck){
-          this.SET_PWCHECK(true);
+          this.pwIsEqual=true;
         } else {
-          this.SET_PWCHECK(false);
+          this.pwIsEqual=false;
         }
       } else {
-        this.SET_PWCHECK(false);
+        this.pwIsEqual=false;
       }
     }
   },
-  computed:{
-    ...mapState(userStore, ["idCheckOk", "pwCheckOk"]),
-  }
 }
 </script>
 <style>

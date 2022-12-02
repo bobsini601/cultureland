@@ -8,13 +8,8 @@ const userStore = {
     isLogin: false,
     isLoginError: false,
     userInfo: null,
-    idCheckOk: false,
-    pwCheckOk: false,
   },
   getters: {
-    checkUserInfo: function (state) {
-      return state.userInfo;
-    },
   },
   mutations: {
     SET_IS_LOGIN: (state, isLogin) => {
@@ -32,12 +27,6 @@ const userStore = {
     },
     CLEAR_USER_INFO: (state) => {
       state.userInfo = null;
-    },
-    SET_IDCHECK: (state, val) => {
-      state.idCheckOk = val;
-    },
-    SET_PWCHECK: (state, val) => {
-      state.pwCheckOk = val;
     },
   },
   actions: {
