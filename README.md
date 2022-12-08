@@ -14,7 +14,8 @@
 ## 2. 프로젝트 구현 환경
 __OS__ : `Window 10` <br>
 __Development Tool__ : `sts`,`vscode` <br>
-__Framework__ : `SpringBoot`, `Vue.js` <br>
+__Framework__ : `SpringBoot`, `Vue.js`, `myBatis` <br>
+__Database Management System__ : `MySQL` <br>
 __Programming Language__ : `Java` <br>
 <br> 
 <br>
