@@ -55,6 +55,12 @@
 		where userid=#{userId}
 	</delete>
 	
+	<select id="selectId" parameterType="Map" resultType="String">
+		select username
+		from user
+		where name=#{name} and email=#{email}
+	</select>
+	
 	<select id="selectPassword" parameterType="Map" resultType="User">
 		select userid, username, nickname, email, token
 		from user

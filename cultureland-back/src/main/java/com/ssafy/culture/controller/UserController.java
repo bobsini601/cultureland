@@ -115,6 +115,23 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 
+	@PostMapping("/findid")
+	public ResponseEntity<String> getId(@RequestBody Map<String, String> userinfo){
+		
+		String result_username = null;
+		HttpStatus status = null;
+		
+		try {
+			result_username = userService.findId(userinfo);
+			status = HttpStatus.ACCEPTED;
+		} catch (SQLException e) {
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+			e.printStackTrace();
+		}
+		
+		return new ResponseEntity<String>(result_username,status);
+	}
+	
 	// 비밀번호 찾기 ( 임시 비밀번호 메일로 전송 ! )
 	@PostMapping("/findpwd")
 	public ResponseEntity<Map<String, Object>> getPassword(@RequestBody Map<String, String> request) {

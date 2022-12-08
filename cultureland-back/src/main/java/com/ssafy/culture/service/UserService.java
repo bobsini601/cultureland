@@ -17,6 +17,8 @@ public interface UserService {
 
 	public int removeUser(long userId) throws SQLException;
 
+	public String findId(Map<String,String> userinfo) throws SQLException;
+	
 	public User findPassword(Map<String, String> request) throws SQLException;
 
 	public User login(User user) throws SQLException;

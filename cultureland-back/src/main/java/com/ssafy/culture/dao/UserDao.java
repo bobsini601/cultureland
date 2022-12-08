@@ -22,6 +22,8 @@ public interface UserDao {
 
 	int deleteUser(long userid) throws SQLException;
 
+	String selectId(Map<String,String> userinfo) throws SQLException;
+	
 	User selectPassword(Map<String, String> username) throws SQLException;
 
 	public void saveRefreshToken(Map<String, String> map) throws SQLException;

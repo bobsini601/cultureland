@@ -186,18 +186,21 @@ const userStore = {
       );
     },
 
-    async findId({commit},user){
-      await findId(
+     async findId({commit},user){
+      let result = null;
+       await findId(
         user,
         ({data})=>{
-          if(data.message=="success"){
             commit("SET_IS_FINDID",true);
-          }
-          else{
+            result = data;
+          },
+        (error)=>{
             commit("SET_IS_FINDID",false);
-          }
-        }
+            console.log(error);
+         },
       )
+
+      return result;
     },
     
     async findPassword({commit} , user){

@@ -51,6 +51,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public String findId(Map<String, String> userinfo) throws SQLException {
+		return userDao.selectId(userinfo);
+	}
+	
+	@Override
 	public User findPassword(Map<String,String> request) throws SQLException {
 		return userDao.selectPassword(request);
 	}
